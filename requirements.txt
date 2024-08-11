@@ -8,7 +8,6 @@ exceptiongroup==1.2.2
 flake8==7.1.1
 iniconfig==2.0.0
 isort==5.13.2
--e git+https://github.com/asaad-98/assignments.git@4ab866dc88794f91765e79d83a5436a2c835e38f#egg=life_expectancy
 mccabe==0.7.0
 mypy-extensions==1.0.0
 numpy==2.0.1
