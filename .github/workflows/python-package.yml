@@ -38,3 +38,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Check Python version
+      run: python --version
+
+    - name: List all installed packages
+      run: pip list
+
+    - name: List all files and directories
+      run: ls -R
+
