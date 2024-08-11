@@ -1,0 +1,54 @@
+# Project metadata
+[project]
+name = "life_expectancy"
+version = "0.1.0"
+description = "First assignment of the Foundations Learning Path"
+readme = "README.md"
+requires-python = ">=3.8"
+
+# Author information
+authors = [
+    {name = "Ahmed Asaad<ahmed.asaad.refaei@gmail.com>"}
+]
+
+# Project dependencies
+dependencies = ["pandas"]
+
+# Optional dependencies
+[project.optional-dependencies]
+dev = [
+    "pytest",       # Testing framework
+    "pylint",       # Code linter for enforcing coding standards
+    "pytest-cov",   # Coverage reporting plugin for pytest
+    "toml"          # For working with TOML files
+]
+
+# Build system configuration
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# Coverage.py configuration
+[tool.coverage.run]
+omit = [
+    "*/conftest.py",  # Omit common test configuration files
+    "*/test*"         # Omit all test files from coverage
+]
+
+[tool.coverage.report]
+fail_under = 80  # Set coverage threshold to 80%
+
+# setuptools configuration
+[tool.setuptools]
+packages = ["life_expectancy"]
+
+# pylint config
+[tool.pylint."messages control"]
+disable = [
+   "missing-module-docstring",
+   # Add any other checks you want to disable here
+]
+
+[tool.mypy]
+plugins = ["pandas-stubs"]
+ignore_missing_imports = true
