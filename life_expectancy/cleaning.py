@@ -5,6 +5,8 @@ from pathlib import Path
 import pandas as pd
 
 
+
+
 def get_project_root() -> Path:
     """Returns the project root directory."""
     return Path(__file__).parent.parent
@@ -15,7 +17,10 @@ def clean_data(country: str = "PT") -> None:
     args:
         country: Country code.
     """
-    df = pd.read_csv(os.path.join('data', 'eu_life_expectancy_raw.tsv'), sep="\t")
+    data_dir = Path(__file__).resolve().parent / 'data'
+    file_path = data_dir / 'eu_life_expectancy_raw.tsv'
+
+    df = pd.read_csv(file_path, sep="\t")
 
     # Split columns
     df[["unit", "sex", "age", "region"]] = \
