@@ -4,20 +4,22 @@ from pathlib import Path
 
 import pandas as pd
 
+
 def get_project_root() -> Path:
     """Returns the project root directory."""
     return Path(__file__).parent.parent
+
 
 def clean_data(country: str = "PT") -> None:
     """Cleans data and saves to csv.
     args:
         country: Country code.
     """
-    data_path = Path(os.getcwd()) / "data"
-    df = pd.read_csv(data_path / "eu_life_expectancy_raw.tsv", sep="\t")
+    df = pd.read_csv(os.path.join('data', 'eu_life_expectancy_raw.tsv'), sep="\t")
 
     # Split columns
-    df[["unit", "sex", "age", "region"]] = df["unit,sex,age,geo\\time"].str.split(
+    df[["unit", "sex", "age", "region"]] = \
+        df["unit,sex,age,geo\\time"].str.split(
         ",", expand=True
     )
 
@@ -29,7 +31,9 @@ def clean_data(country: str = "PT") -> None:
 
     # Unpivot the data (convert from wide to long format)
     df_long = df.melt(
-        id_vars=["unit", "sex", "age", "region"], var_name="year", value_name="value"
+        id_vars=["unit", "sex", "age", "region"],
+        var_name="year",
+        value_name="value"
     )
     del df
 
@@ -39,11 +43,12 @@ def clean_data(country: str = "PT") -> None:
     df_long["value"] = (
         df_long["value"].str.extract(r"(\d+\.\d+)").astype(float)
     )  # remove non numeric
+    df_long.dropna(subset="value", inplace=True)
 
     # Filter
     df_long = df_long.loc[df_long["region"] == country]
 
-    df_long.to_csv(data_path / "pt_life_expectancy.csv", index=False)
+    df_long.to_csv(os.path.join('data', "pt_life_expectancy.csv"), index=False)
 
 
 if __name__ == "__main__":  # pragma: no cover
