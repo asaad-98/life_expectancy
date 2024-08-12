@@ -5,13 +5,6 @@ from pathlib import Path
 import pandas as pd
 
 
-
-
-def get_project_root() -> Path:
-    """Returns the project root directory."""
-    return Path(__file__).parent.parent
-
-
 def clean_data(country: str = "PT") -> None:
     """Cleans data and saves to csv.
     args:
@@ -53,7 +46,7 @@ def clean_data(country: str = "PT") -> None:
     # Filter
     df_long = df_long.loc[df_long["region"] == country]
 
-    df_long.to_csv(os.path.join('data', "pt_life_expectancy.csv"), index=False)
+    df_long.to_csv(os.path.join(data_dir, "pt_life_expectancy.csv"), index=False)
 
 
 if __name__ == "__main__":  # pragma: no cover
